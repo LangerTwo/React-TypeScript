@@ -1,8 +1,11 @@
-const firstName = 'Leo';
-const lastName = 'Nava';
+const firstName: String = 'Leo';
+const lastName: String = 'Nava';
 
 // console.log(firstName, lastName);
 
-const containsLetterN = lastName.includes('n');
+let diceNumber: Number = 2;
+diceNumber = 4;
 
-console.log({ containsLetterN })
+const containsLetterN = lastName.includes('N');
+
+console.log({ containsLetterN, diceNumber, firstName, lastName });
