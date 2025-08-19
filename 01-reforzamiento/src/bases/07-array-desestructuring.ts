@@ -11,3 +11,18 @@ const returnArrayFn = () =>{
 const [letters, numbers] = returnArrayFn();
 
 console.log(letters, numbers);
+
+// Tarea
+
+const useState = (value: string) => {
+    return [
+        value,
+        (newValue: string) => {
+            console.log(`State changed: ${newValue}`);
+        }
+    ] as const;
+};
+
+const [name, setName] = useState('Goku');
+console.log(name);
+setName('Vegeta')
