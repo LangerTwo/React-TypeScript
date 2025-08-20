@@ -7,9 +7,10 @@ import './style.css'
 // import './bases/05-functions';
 // import './bases/06-obj-destructuring';
 // import './bases/07-array-desestructuring';
-import './bases/08-imp-exp';
-import { getHeroesByOwner } from './bases/08-imp-exp';
-import { Owner } from './data/heroes.data';
+// import './bases/08-imp-exp';
+// import { getHeroesByOwner } from './bases/08-imp-exp';
+// import { Owner } from './data/heroes.data';
+import './bases/09-promises';
 
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
@@ -18,4 +19,4 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   </div>
 `;
 
-console.log(getHeroesByOwner(Owner.Marvel));
+// console.log(getHeroesByOwner(Owner.Marvel));
