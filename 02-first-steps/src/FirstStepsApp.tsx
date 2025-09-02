@@ -6,10 +6,9 @@ interface ItemInCart {
 };
 
 const itemsInCart: ItemInCart[] = [
-    { productName: 'Nintendo Switch 2', quantity: 15 },
-    { productName: 'Pro Controller', quantity: 20 },
-    { productName: 'Super Smash', quantity: 25 },
-    { productName: 'Super Mario', quantity: 30 },
+    { productName: 'Nintendo Switch 2', quantity: 1 },
+    { productName: 'Pro Controller', quantity: 2 },
+    { productName: 'Super Smash', quantity: 3 },
 ];
 
 export function FirstStepsApp() {
