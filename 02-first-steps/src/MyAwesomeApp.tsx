@@ -24,7 +24,7 @@ export function MyAwesomeApp() {
             <h1 data-testid="first-name-tittle">{ firstName }</h1>
             <h3>{ lastName }</h3>
 
-            <p>{favotiteGames.join(', ')}</p>
+            <p className="mi-clase-favorita">{favotiteGames.join(', ')}</p>
             <p>{ 2 + 2 }</p>
 
             <h1>{isActive ? 'Activo' : 'No activo'}</h1>
