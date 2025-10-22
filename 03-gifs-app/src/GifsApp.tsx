@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { GifsList } from "./gifs/components/GifsList"
 import { PreviousSearches } from "./gifs/components/PreviousSearches"
 import { mockGifs } from "./mock-data/gifs.mock"
@@ -5,19 +6,26 @@ import { CustomHeader } from "./shared/components/CustomHeader"
 import { SearchBar } from "./shared/components/SearchBar"
 
 export const GifsApp = () => {
-  return (
-    <>
-        {/* Header */}
-        <CustomHeader title="Buscador de Gifs" description="Descubre y comparte el gif perfecto"/>
+    
+    const [previousTerms, setPreviousTerms] = useState(['dark souls', 'bloodborne', 'elden ring', 'sekiro']);
 
-        {/* Search */}
-        <SearchBar placeholder="Buscar gifs..."/>
+    const handleTermClicked = (term: string) => {
+        console.log(`Term clicked: ${term}`);
+    };
 
-        {/* Búsquedas Previas */}
-        <PreviousSearches searches={['Elden Ring', 'BloodBorne']}/>
+    return (
+        <>
+            {/* Header */}
+            <CustomHeader title="Buscador de Gifs" description="Descubre y comparte el gif perfecto"/>
 
-        {/* Gifs */}
-        <GifsList gifs={mockGifs}/>
-    </>
-  )
+            {/* Search */}
+            <SearchBar placeholder="Buscar gifs..."/>
+
+            {/* Búsquedas Previas */}
+            <PreviousSearches searches={previousTerms} onLabelClicked={handleTermClicked}/>
+
+            {/* Gifs */}
+            <GifsList gifs={mockGifs}/>
+        </>
+    )
 }
