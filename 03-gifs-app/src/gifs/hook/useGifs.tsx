@@ -25,6 +25,7 @@ export const useGifs = () => {
 
         const gifs = await getGifsByQuery(term)
         setGifs(gifs)
+        gifsCache.current[term] = gifs;
         // console.log(`${term}`);
     };
 
@@ -53,10 +54,10 @@ export const useGifs = () => {
     return {
         // Properties
         gifs,
+        previousTerms,
 
         // Methods
         handleSerach,
-        previousTerms,
         handleTermClicked,
     }
 };
