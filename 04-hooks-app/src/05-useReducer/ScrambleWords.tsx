@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 // import { Button } from '@/components/ui/button';
 import { Button } from '../components/ui/button';
 // import { Input } from '@/components/ui/input';
@@ -26,77 +26,31 @@ export const ScrambleWords = () => {
     totalWords,
   } = state;
 
-//   const [words, setWords] = useState(shuffleArray(GAME_WORDS));
+  useEffect(() => {
+    if(points === 0) return;
 
-//   const [currentWord, setCurrentWord] = useState(words[0]);
-//   const [scrambledWord, setScrambledWord] = useState(scrambleWord(currentWord));
-//   const [guess, setGuess] = useState('');
-//   const [points, setPoints] = useState(0);
-//   const [errorCounter, setErrorCounter] = useState(0);
-//   const [maxAllowErrors, setMaxAllowErrors] = useState(3);
+    confetti({
+        particleCount: 100,
+        spread: 120,
+        origin: { y: 0.6 }
+    })
 
-//   const [skipCounter, setSkipCounter] = useState(0);
-//   const [maxSkips, setMaxSkips] = useState(3);
-
-//   const [isGameOver, setIsGameOver] = useState(false);
+  }, [points])
 
   const handleGuessSubmit = (e: React.FormEvent) => {
-    // Previene el refresh de la página
     e.preventDefault();
 
     dispatch({
         type: 'CHECK_ANSWER',
     });
-    // Implementar lógica de juego
-    // console.log('Intento de adivinanza:', guess, currentWord);
-    // if(guess === currentWord) {
-    //     const newWords = words.slice(1);
-
-    //     confetti({
-    //         particleCount: 100,
-    //         spread: 120,
-    //         origin: { y: 0.6 }
-    //     })
-
-    //     setPoints(points + 1);
-    //     setGuess('');
-    //     setWords(newWords);
-    //     setCurrentWord(newWords[0]);
-    //     setScrambledWord(scrambleWord(newWords[0]));
-    //     return;
-    // }
-
-    // setErrorCounter(errorCounter + 1);
-    // setGuess('');
-
-    // if(errorCounter + 1 >= maxAllowErrors) {
-    //     setIsGameOver(true)
-    // }
   };
 
   const handleSkip = () => {
-//     if (skipCounter >= maxSkips) return;
-
-//     const updateWords = words.splice(1);
-    
-//     setSkipCounter(skipCounter + 1);
-//     setWords(updateWords);
-//     setCurrentWord(updateWords[0]);
-//     setScrambledWord(scrambleWord(updateWords[0]));
-//     setGuess('');
+    dispatch({ type: 'SKIP_WORD' });
   };
 
   const handlePlayAgain = () => {
-    // const newArray = shuffleArray(GAME_WORDS)
-
-    // setPoints(0);
-    // setErrorCounter(0);
-    // setGuess('');
-    // setWords(newArray);
-    // setCurrentWord(newArray[0]);
-    // setIsGameOver(false);
-    // setSkipCounter(0);
-    // setScrambledWord(scrambleWord(newArray[0]));
+    dispatch({ type: 'START_NEW_GAME', payload: getIntialState() });
   };
 
   //! Si ya no hay palabras para jugar, se muestra el mensaje de fin de juego
@@ -108,18 +62,18 @@ export const ScrambleWords = () => {
     })
     
     return (
-      <div className="min-h-screen bg-linear-to-br from-purple-100 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <div className="w-full min-h-screen bg-linear-to-br from-purple-100 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
         <div className="w-full max-w-md mx-auto">
           <h1 className="text-4xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
             Palabras desordenadas
           </h1>
           <p className="text-gray-600">No hay palabras para jugar</p>
           <br />
-          <div>Puntaje: {points}</div>
+          <div className="text-gray-600">Puntaje: {points}</div>
           <br />
-          <div>Errores: {errorCounter}</div>
+          <div className="text-gray-600">Errores: {errorCounter}</div>
           <br />
-          <div>Saltos: {skipCounter}</div>
+          <div className="text-gray-600">Saltos: {skipCounter}</div>
           <br />
           <Button onClick={handlePlayAgain}>Jugar de nuevo</Button>
         </div>
