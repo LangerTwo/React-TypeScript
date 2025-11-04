@@ -6,6 +6,7 @@ import { Input } from '../components/ui/input';
 // import { Card, CardContent } from '@/components/ui/card';
 import { Card, CardContent } from '../components/ui/card';
 import { SkipForward, Play } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 const GAME_WORDS = [
   'REACT',
@@ -59,28 +60,69 @@ export const ScrambleWords = () => {
     // Previene el refresh de la página
     e.preventDefault();
     // Implementar lógica de juego
-    console.log('Intento de adivinanza:', guess, currentWord);
+    // console.log('Intento de adivinanza:', guess, currentWord);
+    if(guess === currentWord) {
+        const newWords = words.slice(1);
 
+        confetti({
+            particleCount: 100,
+            spread: 120,
+            origin: { y: 0.6 }
+        })
+
+        setPoints(points + 1);
+        setGuess('');
+        setWords(newWords);
+        setCurrentWord(newWords[0]);
+        setScrambledWord(scrambleWord(newWords[0]));
+        return;
+    }
+
+    setErrorCounter(errorCounter + 1);
+    setGuess('');
+
+    if(errorCounter + 1 >= maxAllowErrors) {
+        setIsGameOver(true)
+    }
   };
 
   const handleSkip = () => {
-    console.log('Palabra saltada');
+    if (skipCounter >= maxSkips) return;
 
+    const updateWords = words.splice(1);
     
+    setSkipCounter(skipCounter + 1);
+    setWords(updateWords);
+    setCurrentWord(updateWords[0]);
+    setScrambledWord(scrambleWord(updateWords[0]));
+    setGuess('');
   };
 
   const handlePlayAgain = () => {
-    console.log('Jugar de nuevo');
-    
+    const newArray = shuffleArray(GAME_WORDS)
+
+    setPoints(0);
+    setErrorCounter(0);
+    setGuess('');
+    setWords(newArray);
+    setCurrentWord(newArray[0]);
+    setIsGameOver(false);
+    setSkipCounter(0);
+    setScrambledWord(scrambleWord(newArray[0]));
   };
 
   //! Si ya no hay palabras para jugar, se muestra el mensaje de fin de juego
   if (words.length === 0) {
+    confetti({
+        particleCount: 100,
+        spread: 120,
+        origin: { y: 0.6 }
+    })
     
     return (
       <div className="min-h-screen bg-linear-to-br from-purple-100 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
         <div className="w-full max-w-md mx-auto">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
+          <h1 className="text-4xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
             Palabras desordenadas
           </h1>
           <p className="text-gray-600">No hay palabras para jugar</p>
@@ -102,7 +144,7 @@ export const ScrambleWords = () => {
       <div className="w-full max-w-md mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
+          <h1 className="text-4xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
             Palabras desordenadas
           </h1>
           <p className="text-gray-600">
@@ -126,7 +168,7 @@ export const ScrambleWords = () => {
                 {scrambledWord.split('').map((letter, index) => (
                   <div
                     key={index}
-                    className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
+                    className="w-12 h-12 bg-linear-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
                     style={{
                       animationDelay: `${index * 0.1}s`,
                       animation: 'fadeInUp 0.6s ease-out forwards',
@@ -163,7 +205,7 @@ export const ScrambleWords = () => {
                 </div>
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200"
+                  className="w-full bg-linear-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200"
                   disabled={!guess.trim() || isGameOver}
                 >
                   Enviar Adivinanza
@@ -173,13 +215,13 @@ export const ScrambleWords = () => {
 
             {/* Stats */}
             <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 text-center border border-green-200">
+              <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-lg p-4 text-center border border-green-200">
                 <div className="text-2xl font-bold text-green-600">
                   {points} / {GAME_WORDS.length}
                 </div>
                 <div className="text-sm text-green-700 font-medium">Puntos</div>
               </div>
-              <div className="bg-gradient-to-br from-red-50 to-rose-50 rounded-lg p-4 text-center border border-red-200">
+              <div className="bg-linear-to-br from-red-50 to-rose-50 rounded-lg p-4 text-center border border-red-200">
                 <div className="text-2xl font-bold text-red-600">
                   {errorCounter}/{maxAllowErrors}
                 </div>
