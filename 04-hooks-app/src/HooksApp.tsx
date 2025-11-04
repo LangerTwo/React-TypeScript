@@ -3,12 +3,13 @@
 // import { TrafficLightWithHook } from "./02-useEffect/TrafficLightWithHook"
 // import { PokemonPage } from "./03-examples/PokemonPage"
 // import { FocusScreen } from "./04-useRef/FocusScreen"
-import { TasksApp } from "./05-useReducer/TaskApp"
+// import { TasksApp } from "./05-useReducer/TaskApp"
+import { ScrambleWords } from "./05-useReducer/ScrambleWords"
 
 const HooksApp = () => {
   return (
     <div className="bg-gradient">
-        <TasksApp />
+      <ScrambleWords />
     </div>
   )
 }
