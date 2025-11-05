@@ -1,3 +1,5 @@
+import { Toaster } from 'sonner'
+
 // import { TrafficLight } from "./01-useState/TrafficLight"
 // import { TrafficLightWithEffect } from "./02-useEffect/TrafficLightWithEffect"
 // import { TrafficLightWithHook } from "./02-useEffect/TrafficLightWithHook"
@@ -14,6 +16,7 @@ import './index.css'
 const HooksApp = () => {
   return (
     <div className="bg-gradient">
+      <Toaster />
       <InstagromApp />
     </div>
   )
