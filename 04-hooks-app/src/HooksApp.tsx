@@ -6,12 +6,15 @@
 // import { TasksApp } from "./05-useReducer/TaskApp"
 // import { ScrambleWords } from "./05-useReducer/ScrambleWords"
 // import { MemoHook } from "./06-memos/MemoHook"
-import { MemoCounter } from "./06-memos/MemoCounter"
+// import { MemoCounter } from "./06-memos/MemoCounter"
+import { InstagromApp } from "./07-useOptimistc/InstagromApp"
+
+import './index.css'
 
 const HooksApp = () => {
   return (
     <div className="bg-gradient">
-      <MemoCounter />
+      <InstagromApp />
     </div>
   )
 }
