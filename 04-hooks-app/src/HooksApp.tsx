@@ -9,15 +9,16 @@ import { Toaster } from 'sonner'
 // import { ScrambleWords } from "./05-useReducer/ScrambleWords"
 // import { MemoHook } from "./06-memos/MemoHook"
 // import { MemoCounter } from "./06-memos/MemoCounter"
-import { InstagromApp } from "./07-useOptimistc/InstagromApp"
+// import { InstagromApp } from "./07-useOptimistc/InstagromApp"
+import { ClientInformation } from './08-use-suspense/ClientInformation'
 
-import './index.css'
+// import './index.css'
 
 const HooksApp = () => {
   return (
     <div className="bg-gradient">
       <Toaster />
-      <InstagromApp />
+      <ClientInformation id={100}/>
     </div>
   )
 }
