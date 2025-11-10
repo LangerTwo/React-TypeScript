@@ -3,7 +3,7 @@ import { Button } from "../../../components/ui/button"
 import { UserContext } from "../../context/UserContext"
 
 export const ProfilePage = () => {
-  const { user } = useContext(UserContext)
+  const { user, logout } = useContext(UserContext)
   
 
   return (
@@ -11,8 +11,8 @@ export const ProfilePage = () => {
       <h1 className="text-4xl">Perfil del usuario</h1>
       <hr />
 
-      <pre className="my-4 w-full overflow-auto">{JSON.stringify({user}, null, 2)}</pre>
-      <Button variant="destructive">Salir</Button>
+      <pre className="my-4 w-[80%] overflow-auto">{JSON.stringify(user, null, 2)}</pre>
+      <Button variant="destructive" onClick={logout}>Salir</Button>
     </div>
   )
 }
