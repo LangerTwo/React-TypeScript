@@ -6,7 +6,7 @@ import { UserContextProvider } from "./context/UserContext";
 export const ProfessionalApp = () => {
     return (
         <UserContextProvider>
-            <div className="bg-linear w-full">
+            <div className="bg-linear">
                 <RouterProvider router={appRouter} />
             </div>
         </UserContextProvider>
