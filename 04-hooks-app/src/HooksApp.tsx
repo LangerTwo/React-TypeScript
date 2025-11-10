@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { Toaster } from 'sonner'
 
 // import { TrafficLight } from "./01-useState/TrafficLight"
@@ -11,6 +12,7 @@ import { Toaster } from 'sonner'
 // import { MemoCounter } from "./06-memos/MemoCounter"
 // import { InstagromApp } from "./07-useOptimistc/InstagromApp"
 import { ClientInformation } from './08-use-suspense/ClientInformation'
+import { getUserAction } from './08-use-suspense/get-user-action'
 
 // import './index.css'
 
@@ -18,7 +20,13 @@ const HooksApp = () => {
   return (
     <div className="bg-gradient">
       <Toaster />
-      <ClientInformation id={100}/>
+        <Suspense fallback={(
+          <div className='bg-linear flex flex-col'>
+            <h1 className='text-2xl'>Cargando</h1>
+          </div>
+        )}>
+          <ClientInformation getUser={getUserAction(100)}/>
+        </Suspense>
     </div>
   )
 }
