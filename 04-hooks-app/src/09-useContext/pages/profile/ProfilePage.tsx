@@ -11,7 +11,7 @@ export const ProfilePage = () => {
       <h1 className="text-4xl">Perfil del usuario</h1>
       <hr />
 
-      <pre className="my-4 w-[80%] overflow-auto">{JSON.stringify(user, null, 2)}</pre>
+      <pre className="my-4 w-auto overflow-auto">{JSON.stringify(user, null, 2)}</pre>
       <Button variant="destructive" onClick={logout}>Salir</Button>
     </div>
   )
