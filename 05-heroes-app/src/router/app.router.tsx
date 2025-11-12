@@ -1,3 +1,4 @@
+import { AdminLayout } from "@/admin/layout/AdminLayout";
 import { AdminPage } from "@/admin/pages/AdminPage";
 import { HeroesLayout } from "@/heroes/layout/HeroesLayout";
 import { HeroPage } from "@/heroes/pages/hero/HeroPage";
@@ -27,6 +28,12 @@ export const appRouter = createBrowserRouter([
     },
     {
         path: '/admin',
-        element: <AdminPage />
+        element: <AdminLayout />,
+        children: [
+            {
+                index: true,
+                element: <AdminPage />
+            },
+        ]
     },
 ]);
