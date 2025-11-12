@@ -1,4 +1,5 @@
 import { CustomJumboTron } from "@/components/custom/CustomJumboTron";
+import { HeroStats } from "@/heroes/components/HeroStats";
 
 export const SearchPage = () => {
   return (
@@ -8,6 +9,9 @@ export const SearchPage = () => {
         title="Búsqueda de SuperHéores" 
         description="Descubre, explora y administra héroes y villanos"
       />
+
+      {/* Stats Dashboard */}
+      <HeroStats />
     </>
   )
 }
