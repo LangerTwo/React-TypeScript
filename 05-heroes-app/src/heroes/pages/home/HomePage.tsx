@@ -5,6 +5,7 @@ import { HeroStats } from "@/heroes/components/HeroStats"
 import { HeroGrid } from "@/heroes/components/HeroGrid"
 import { useState } from "react"
 import { CustpmPaginaion } from "@/components/custom/CustpmPaginaion"
+import { CustomBreadcrum } from "@/components/custom/CustomBreadcrum"
 
 export const HomePage = () => {
   const [activeTab, setActiveTab] = useState<
@@ -19,6 +20,9 @@ export const HomePage = () => {
           title="Universo de SuperHéores" 
           description="Descubre, explora y administra héroes y villanos"
         />
+
+        {/* Breadcrum */}
+        <CustomBreadcrum currentPage="Super Héroes"/>
 
         {/* Stats Dashboard */}
         <HeroStats /> 
