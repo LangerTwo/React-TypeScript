@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import { lazy } from "react";
 
 import { AdminLayout } from "@/admin/layout/AdminLayout";
@@ -21,12 +21,17 @@ export const appRouter = createBrowserRouter([
                 element: <HomePage />
             },
             {
-                path: 'heros/1',
+                path: 'heros/:idSlug',
                 element: <HeroPage />
             },
             {
                 path: 'search',
                 element: <SearchPage />
+            },
+            {
+                path: '/',
+                // element: <h1>404</h1>
+                element: <Navigate to="/"/>
             },
         ]
     },
