@@ -12,9 +12,9 @@ import { usePaginatedHero } from "@/heroes/hooks/usePaginatedHero"
 import { useHomePage } from "@/heroes/hooks/useHomePage"
 
 export const HomePage = () => {
-  const {setSearchParams, page, limit, selectedTab} = useHomePage()
+  const {setSearchParams, page, limit, selectedTab, category } = useHomePage()
 
-  const {data: heroesResponse} = usePaginatedHero(+page, +limit)
+  const {data: heroesResponse} = usePaginatedHero(+page, +limit, category)
 
   const { data: summary } = useHeroSummary();
 
@@ -41,6 +41,8 @@ export const HomePage = () => {
               onClick={() => 
               setSearchParams((prev) => {
                 prev.set('tab', 'all');
+                prev.set('category', 'all');
+                prev.set('page', '1');
                 return prev;
               })}
             >
@@ -64,6 +66,8 @@ export const HomePage = () => {
               onClick={() => 
               setSearchParams((prev) => {
                 prev.set('tab', 'heroes');
+                prev.set('category', 'hero');
+                prev.set('page', '1');
                 return prev;
               })}
             >
@@ -74,6 +78,8 @@ export const HomePage = () => {
               value="villains" 
               onClick={() => setSearchParams((prev) => {
                 prev.set('tab', 'villains');
+                prev.set('category', 'villain');
+                prev.set('page', '1');
                 return prev;
               })}
             >
@@ -95,13 +101,13 @@ export const HomePage = () => {
           <TabsContent value="heroes">
             {/* Mostrar todos los personajes heroes*/}
             <h1>Heroes</h1>
-            <HeroGrid heroes={[]}/>
+            <HeroGrid heroes={heroesResponse?.heroes ?? []}/>
           </TabsContent>
 
           <TabsContent value="villains">
             {/* Mostrar todos los personajes villanos */}
             <h1>Villanos</h1>
-            <HeroGrid heroes={[]}/>
+            <HeroGrid heroes={heroesResponse?.heroes ?? []}/>
           </TabsContent>
         </Tabs>
 
