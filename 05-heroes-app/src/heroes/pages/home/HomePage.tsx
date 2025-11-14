@@ -11,6 +11,7 @@ import { CustomBreadcrum } from "@/components/custom/CustomBreadcrum"
 import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action"
 //
 import { useQuery } from '@tanstack/react-query';
+import { getSummaryAction } from "@/heroes/actions/get-summary.actions"
 
 export const HomePage = () => {
   const [ searchParams, setSearchParams ] = useSearchParams();
@@ -29,6 +30,12 @@ export const HomePage = () => {
     queryFn: () => getHeroesByPageAction(+page, +limit),
     staleTime: 1000 * 60 * 5, // 5 minutos
   })
+
+  const { data: summary } = useQuery({
+    queryKey: ['summary-information'],
+    queryFn: getSummaryAction,
+    staleTime: 1000 * 60 * 5, // 5 minutos
+  });
 
   return (
     <>
@@ -56,7 +63,7 @@ export const HomePage = () => {
                 return prev;
               })}
             >
-              All Characters (16)
+              All Characters ({summary?.totalHeroes})
             </TabsTrigger>
 
             <TabsTrigger 
@@ -79,7 +86,7 @@ export const HomePage = () => {
                 return prev;
               })}
             >
-              Heroes (12)
+              Heroes ({summary?.heroCount})
             </TabsTrigger>
 
             <TabsTrigger 
@@ -89,7 +96,7 @@ export const HomePage = () => {
                 return prev;
               })}
             >
-              Villains (2)
+              Villains ({summary?.villainCount})
             </TabsTrigger>
           </TabsList>
 
