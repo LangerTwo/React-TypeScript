@@ -12,7 +12,7 @@ import { usePaginatedHero } from "@/heroes/hooks/usePaginatedHero"
 import { useHomePage } from "@/heroes/hooks/useHomePage"
 
 export const HomePage = () => {
-  const {setSearchParams, page, limit, selectedTab, category } = useHomePage()
+  const {setSearchParams, page, limit, selectedTab, category, favoriteCount, favorites } = useHomePage()
 
   const {data: heroesResponse} = usePaginatedHero(+page, +limit, category)
 
@@ -58,7 +58,7 @@ export const HomePage = () => {
               })}
             >
               <Heart className="h-4 w-4" />
-              Favorites (3)
+              Favorites ({favoriteCount})
             </TabsTrigger>
 
             <TabsTrigger 
@@ -95,7 +95,7 @@ export const HomePage = () => {
           <TabsContent value="favorites">
             {/* Mostrar todos los personajes favoritos */}
             <h1>Favoritos</h1>
-            <HeroGrid heroes={[]}/>
+            <HeroGrid heroes={favorites}/>
           </TabsContent>
 
           <TabsContent value="heroes">
@@ -112,7 +112,9 @@ export const HomePage = () => {
         </Tabs>
 
         {/* Pagination */}
-        <CustpmPaginaion totalPages={heroesResponse?.pages ?? 1}/>
+        {selectedTab !== 'favorites' && (
+          <CustpmPaginaion totalPages={heroesResponse?.pages ?? 1}/>
+        )}
       </>
     </>
   )
