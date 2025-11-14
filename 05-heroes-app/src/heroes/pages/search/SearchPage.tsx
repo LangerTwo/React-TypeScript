@@ -13,11 +13,11 @@ export const SearchPage = () => {
       />
 
       <CustomBreadcrum currentPage="Buscador de Heroes"
-        breadcrumbs={[
-          {label: 'Home1', to: '/'},
-          {label: 'Home2', to: '/'},
-          {label: 'Home3', to: '/'},
-        ]}
+        // breadcrumbs={[
+        //   {label: 'Home1', to: '/'},
+        //   {label: 'Home2', to: '/'},
+        //   {label: 'Home3', to: '/'},
+        // ]}
       />
 
       {/* Stats Dashboard */}

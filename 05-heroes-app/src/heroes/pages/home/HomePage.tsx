@@ -3,22 +3,26 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CustomJumboTron } from "@/components/custom/CustomJumboTron"
 import { HeroStats } from "@/heroes/components/HeroStats"
 import { HeroGrid } from "@/heroes/components/HeroGrid"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { CustpmPaginaion } from "@/components/custom/CustpmPaginaion"
 import { CustomBreadcrum } from "@/components/custom/CustomBreadcrum"
-import { getHeroesByPage } from "@/heroes/actions/get-heroes-by-page.action"
-import { heroes } from '../../../../../01-reforzamiento/src/data/heroes.data';
+import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action"
+import { useQuery } from '@tanstack/react-query';
 
 export const HomePage = () => {
   const [activeTab, setActiveTab] = useState<
     'all' | 'favorites' | 'heroes' | 'villains'
   >('all');
 
-  useEffect(() => {
-    getHeroesByPage().then((heroes) => {
-      console.log(heroes)
-    })
-  }, [])
+  const {data} = useQuery({
+    queryKey: ['heroes'],
+    queryFn: () => getHeroesByPageAction(),
+    staleTime: 1000 * 60 * 5, // 5 minutos
+  })
+
+  // useEffect(() => {
+  //   getHeroesByPageAction().then()
+  // }, [])
 
   return (
     <>
