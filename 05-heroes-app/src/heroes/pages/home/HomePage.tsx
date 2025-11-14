@@ -1,5 +1,3 @@
-import { useMemo } from "react"
-import { useSearchParams } from "react-router"
 import {Heart,} from "lucide-react"
 //
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -8,34 +6,17 @@ import { HeroStats } from "@/heroes/components/HeroStats"
 import { HeroGrid } from "@/heroes/components/HeroGrid"
 import { CustpmPaginaion } from "@/components/custom/CustpmPaginaion"
 import { CustomBreadcrum } from "@/components/custom/CustomBreadcrum"
-import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action"
-//
-import { useQuery } from '@tanstack/react-query';
-import { getSummaryAction } from "@/heroes/actions/get-summary.actions"
+
+import { useHeroSummary } from "@/heroes/hooks/useHeroSummary"
+import { usePaginatedHero } from "@/heroes/hooks/usePaginatedHero"
+import { useHomePage } from "@/heroes/hooks/useHomePage"
 
 export const HomePage = () => {
-  const [ searchParams, setSearchParams ] = useSearchParams();
+  const {setSearchParams, page, limit, selectedTab} = useHomePage()
 
-  const activeTab = searchParams.get('tab') ?? 'all';
-  const page = searchParams.get('page') ?? '1';
-  const limit = searchParams.get('limit') ?? '6';
+  const {data: heroesResponse} = usePaginatedHero(+page, +limit)
 
-  const selectedTab = useMemo(() => {
-    const validTabs = ['all', 'favorites', 'heroes', 'villains'];
-    return validTabs.includes(activeTab) ? activeTab : 'all';
-  }, [activeTab]);
-
-  const {data: heroesResponse} = useQuery({
-    queryKey: ['heroes', {page, limit}],
-    queryFn: () => getHeroesByPageAction(+page, +limit),
-    staleTime: 1000 * 60 * 5, // 5 minutos
-  })
-
-  const { data: summary } = useQuery({
-    queryKey: ['summary-information'],
-    queryFn: getSummaryAction,
-    staleTime: 1000 * 60 * 5, // 5 minutos
-  });
+  const { data: summary } = useHeroSummary();
 
   return (
     <>
