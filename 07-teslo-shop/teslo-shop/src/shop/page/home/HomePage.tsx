@@ -14,7 +14,7 @@ export const HomePage = () => {
       <ProductGrid products={ data?.products || [] }/>
 
       {/* Pagination */}
-      <CustpmPaginaion totalPages={ data?.products || 0 }/>
+      <CustpmPaginaion totalPages={5}/>
     </>
   )
 };
