@@ -6,4 +6,4 @@ const tesloApi = axios.create({
 
 // TODO: interceptors
 
-export default {tesloApi};
+export {tesloApi};
