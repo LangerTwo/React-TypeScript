@@ -22,10 +22,11 @@ yarn start:dev
 
 ```
 
-7. Ejecutar SEED
+7. Ejecutar SEED en postman
 
 ```
 http://localhost:3000/api/seed
+localhost:3000/api/products
 ```
 
 # Production notes:
